@@ -83,7 +83,7 @@ namespace SaintSender.Core.Services
             IList<MessagePart> messageParts = message.Payload.Parts;
 
             StringBuilder bodyBuilder = new StringBuilder(); // lul
-            getPlainTextFromNestedParts(messageParts, bodyBuilder);
+            GetBodyFromNestedParts(messageParts, bodyBuilder);
 
             if (bodyBuilder.Length == 0)
             {
@@ -137,7 +137,7 @@ namespace SaintSender.Core.Services
         //    }
         //}
 
-        private void getPlainTextFromNestedParts(IList<MessagePart> messageParts, StringBuilder stringBuilder)
+        private void GetBodyFromNestedParts(IList<MessagePart> messageParts, StringBuilder stringBuilder)
         {
 
             if (messageParts != null)
@@ -152,9 +152,10 @@ namespace SaintSender.Core.Services
 
                     if (messagePart.Parts != null)
                     {
-                        getPlainTextFromNestedParts(messagePart.Parts, stringBuilder);
+                        GetBodyFromNestedParts(messagePart.Parts, stringBuilder);
                     }
                 }
+
             }
         }
     }
