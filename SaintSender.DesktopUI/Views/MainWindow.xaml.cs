@@ -47,18 +47,6 @@ namespace SaintSender.DesktopUI
 
         }
 
-        private void GreetBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var service = new GreetService();
-            //var greeting = service.Greet(NigerianPrinceName);
-
-            List<Email> emails = emailService.GetEmails();
-
-            ResultTxt.Text = emails[1].ToString();
-
-
-        }
-
         private void SignOutBtn_Click(object sender, RoutedEventArgs e)
         {
             Gmail.RevokeToken(credential);
