@@ -22,6 +22,7 @@ using Org.BouncyCastle.Utilities.Encoders;
 using SaintSender.Core.Services;
 using SaintSender.Core.Entities;
 using Thread = System.Threading.Thread;
+using SaintSender.DesktopUI.ViewModels;
 
 namespace SaintSender.DesktopUI
 {
@@ -34,11 +35,13 @@ namespace SaintSender.DesktopUI
         private UserCredential credential;
         private GmailService gmail;
         private EmailService emailService;
+        private MainWindowViewModel _vm;
         public MainWindow()
         {
             InitializeComponent();
-
-            emailService = new EmailService();
+            this._vm = new MainWindowViewModel();
+            this.DataContext = _vm;
+            
 
 
             //UsersResource.LabelsResource.ListRequest request = Gmail.GetService().Users.Labels.List("me");

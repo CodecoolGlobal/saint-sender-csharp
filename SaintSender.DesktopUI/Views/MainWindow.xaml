@@ -27,10 +27,14 @@
             </Grid>
         </Border>
         <Grid Grid.Row="2" Margin="0,5,0,0">
-            <ListBox>
-                <ListBoxItem>
-                    <TextBlock Text="Text"></TextBlock>
-                </ListBoxItem>
+            <ListBox ItemsSource="{Binding Emails}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <ListBoxItem DataContext="{Binding Subject}">
+                            
+                        </ListBoxItem>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
     </Grid>
