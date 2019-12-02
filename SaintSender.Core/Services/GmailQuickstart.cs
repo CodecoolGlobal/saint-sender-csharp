@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,22 +24,7 @@ namespace GmailQuickstart
 
         public static GmailService GetService()
         {
-            UserCredential credential;
-
-            using (var stream =
-                new FileStream(CredentialJSON, FileMode.Open, FileAccess.Read))
-            {
-                // The file token.json stores the user's access and refresh tokens, and is created
-                // automatically when the authorization flow completes for the first time.
-                string credPath = "token.json";
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
-            }
+            UserCredential credential = GetCredential();
 
             // Create Gmail API service.
             var service = new GmailService(new BaseClientService.Initializer()
@@ -71,6 +55,32 @@ namespace GmailQuickstart
 
             return service;
 
+        }
+
+        public static UserCredential GetCredential()
+        {
+            UserCredential credential;
+
+            using (var stream =
+                new FileStream(CredentialJSON, FileMode.Open, FileAccess.Read))
+            {
+                // The file token.json stores the user's access and refresh tokens, and is created
+                // automatically when the authorization flow completes for the first time.
+                string credPath = "token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    Scopes,
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+            }
+
+            return credential;
+        }
+
+        public static void RevokeToken(UserCredential credential)
+        {
+            credential.RevokeTokenAsync(CancellationToken.None);
         }
     }
 }
