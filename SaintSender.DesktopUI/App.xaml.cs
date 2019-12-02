@@ -24,26 +24,26 @@ namespace SaintSender.DesktopUI
     {
         //private GmailService gmail = Gmail.GetService();
 
-        public void Test()
-        {
-            // Define parameters of request.
-            UsersResource.LabelsResource.ListRequest request = Gmail.GetService().Users.Labels.List("kdani782@gmail.com");
+        //public void Test()
+        //{
+        //    // Define parameters of request.
+        //    UsersResource.LabelsResource.ListRequest request = Gmail.GetService().Users.Labels.List("kdani782@gmail.com");
 
-            // List labels.
-            IList<Label> labels = request.Execute().Labels;
-            Console.WriteLine("Labels:");
-            if (labels != null && labels.Count > 0)
-            {
-                foreach (var labelItem in labels)
-                {
-                    Console.WriteLine("{0}", labelItem.Name);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No labels found.");
-            }
-            Console.Read();
-        }
+        //    // List labels.
+        //    IList<Label> labels = request.Execute().Labels;
+        //    Console.WriteLine("Labels:");
+        //    if (labels != null && labels.Count > 0)
+        //    {
+        //        foreach (var labelItem in labels)
+        //        {
+        //            Console.WriteLine("{0}", labelItem.Name);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("No labels found.");
+        //    }
+        //    Console.Read();
+        //}
     }
 }
