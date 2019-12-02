@@ -7,7 +7,7 @@ namespace SaintSender.Core.Services
     {
         public string Greet(string name)
         {
-            return $"Welcome {name}, my friend!";
+            return $"Welcome {name} my friend!";
         }
     }
 }
