@@ -7,25 +7,28 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace GmailQuickstart
 {
-    class Program
+    public class Gmail
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/gmail-dotnet-quickstart.json
         static string[] Scopes = { GmailService.Scope.GmailReadonly };
         static string ApplicationName = "Gmail API .NET Quickstart";
 
+        private static string CredentialJSON = @"..\..\..\SaintSender.Core\Resources\credentials.json";
+
         public static GmailService GetService()
         {
             UserCredential credential;
 
             using (var stream =
-                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                new FileStream(CredentialJSON, FileMode.Open, FileAccess.Read))
             {
                 // The file token.json stores the user's access and refresh tokens, and is created
                 // automatically when the authorization flow completes for the first time.
@@ -46,7 +49,6 @@ namespace GmailQuickstart
                 ApplicationName = ApplicationName,
             });
 
-            return service;
 
             //// Define parameters of request.
             //UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
@@ -66,6 +68,9 @@ namespace GmailQuickstart
             //    Console.WriteLine("No labels found.");
             //}
             //Console.Read();
+
+            return service;
+
         }
     }
 }

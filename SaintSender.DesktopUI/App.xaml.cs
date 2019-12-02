@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Gmail.v1.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 
 namespace SaintSender.DesktopUI
 {
@@ -16,7 +21,7 @@ namespace SaintSender.DesktopUI
     /// </summary>
     public partial class App : Application
     {
-        private GmailService gmail = GmailQuickstart.Program.GetService();
+        private GmailService gmail = GmailQuickstart.Gmail.GetService();
 
         public void Test()
         {
