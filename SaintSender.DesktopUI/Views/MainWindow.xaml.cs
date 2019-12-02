@@ -27,12 +27,6 @@ namespace SaintSender.DesktopUI
             InitializeComponent();
         }
 
-        private void GreetBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var service = new GreetService();
-            var name = NameTxt.Text;
-            var greeting = service.Greet(name);
-            ResultTxt.Text = greeting;
-        }
+        
     }
 }
