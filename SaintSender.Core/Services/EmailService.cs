@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -27,7 +28,7 @@ namespace SaintSender.Core.Services
 
             UsersResource.MessagesResource.ListRequest messageRequest = gmail.Users.Messages.List("me");
 
-            messageRequest.MaxResults = 10;
+            messageRequest.MaxResults = 20;
             messageRequest.IncludeSpamTrash = true;
             messageRequest.LabelIds = "INBOX";
 
@@ -37,14 +38,14 @@ namespace SaintSender.Core.Services
             {
                 Message messageInfo = gmail.Users.Messages.Get("me", message.Id).Execute();
 
-                Email email = BuildEmail(messageInfo);
+                Email email = BuildEmail(messageInfo, message.Id);
                 emails.Add(email);
             }
 
             return emails;
         }
 
-        private Email BuildEmail(Message message)
+        private Email BuildEmail(Message message, string messageId)
         {
             IList<MessagePartHeader> messageHeaders = message.Payload.Headers;
 
@@ -57,22 +58,22 @@ namespace SaintSender.Core.Services
 
             foreach (MessagePartHeader header in messageHeaders)
             {
-
+                //16
                 if (header.Name == "From")
                 {
                     from = header.Value;
                 }
-
+                //20
                 else if (header.Name == "To")
                 {
                     to = header.Value;
                 }
-
+                //19
                 else if (header.Name == "Subject")
                 {
                     subject = header.Value;
                 }
-
+                //17
                 else if (header.Name == "Date")
                 {
                     date = header.Value;
@@ -83,7 +84,7 @@ namespace SaintSender.Core.Services
             IList<MessagePart> messageParts = message.Payload.Parts;
 
             StringBuilder bodyBuilder = new StringBuilder(); // lul
-            GetBodyFromNestedParts(messageParts, bodyBuilder);
+            GetBodyFromNestedParts(messageId, messageParts, bodyBuilder); // message id here
 
             if (bodyBuilder.Length == 0)
             {
@@ -137,14 +138,27 @@ namespace SaintSender.Core.Services
         //    }
         //}
 
-        private void GetBodyFromNestedParts(IList<MessagePart> messageParts, StringBuilder stringBuilder)
+        private void GetBodyFromNestedParts(string messageId, IList<MessagePart> messageParts, StringBuilder stringBuilder)
         {
 
             if (messageParts != null)
             {
-
                 foreach (MessagePart messagePart in messageParts)
                 {
+                    if (!string.IsNullOrEmpty(messagePart.Filename))
+                    {
+                        string attId = messagePart.Body.AttachmentId;
+                        MessagePartBody attachPart = gmail.Users.Messages.Attachments.Get("me", messageId, attId).Execute();
+
+                        // Converting from RFC 4648 base64 to base64url encoding
+                        // see http://en.wikipedia.org/wiki/Base64#Implementations_and_history
+                        string attachData = attachPart.Data.Replace('-', '+');
+                        attachData = attachData.Replace('_', '/');
+
+                        byte[] data = Convert.FromBase64String(attachData);
+                        File.WriteAllBytes(Path.Combine(@"C:\Users\Dániel Kalocsay\Desktop\emailbackup", messagePart.Filename), data);
+                    }
+
                     if (messagePart.MimeType == "text/plain")
                     {
                         stringBuilder.Append(messagePart.Body.Data);
@@ -152,11 +166,12 @@ namespace SaintSender.Core.Services
 
                     if (messagePart.Parts != null)
                     {
-                        GetBodyFromNestedParts(messagePart.Parts, stringBuilder);
+                        GetBodyFromNestedParts(messageId, messagePart.Parts, stringBuilder);
                     }
                 }
 
             }
+
         }
     }
 }
