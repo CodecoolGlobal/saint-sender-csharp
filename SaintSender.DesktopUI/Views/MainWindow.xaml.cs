@@ -56,10 +56,10 @@ namespace SaintSender.DesktopUI
             Gmail.RevokeToken(credential);
         }
 
-        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ListView item = (ListView)sender;
-            Email email = (Email)item.SelectedItem;
+            ListViewItem item = (ListViewItem)sender;
+            Email email = (Email)item.Content;
             EmailWindow emailWindow = new EmailWindow();
             emailWindow.DataContext = email;
             emailWindow.Show();

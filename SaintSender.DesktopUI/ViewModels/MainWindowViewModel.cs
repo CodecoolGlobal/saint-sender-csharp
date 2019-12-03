@@ -19,8 +19,5 @@ namespace SaintSender.DesktopUI.ViewModels
             this._emailService = new EmailService();
             Emails = new ObservableCollection<Email>(_emailService.GetEmails());
         }
-
-
-
     }
 }
