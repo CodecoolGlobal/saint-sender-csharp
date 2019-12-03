@@ -72,6 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Email.cs" />
+    <Compile Include="Services\EmailService.Attachment.cs" />
+    <Compile Include="Services\EmailService.BuildEmail.cs" />
     <Compile Include="Services\GmailQuickstart.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\GreetService.cs" />
