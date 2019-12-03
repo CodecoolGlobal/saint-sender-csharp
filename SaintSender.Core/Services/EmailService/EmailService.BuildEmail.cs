@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Media.Imaging;
 using Google.Apis.Gmail.v1.Data;
 using Org.BouncyCastle.Utilities.Encoders;
 using SaintSender.Core.Entities;
@@ -23,6 +24,7 @@ namespace SaintSender.Core.Services
             IList<MessagePart> messageParts = message.Payload.Parts;
 
             StringBuilder bodyBuilder = new StringBuilder(); // lul
+            BitmapImage image = new BitmapImage();
             GetBodyFromNestedParts(messageId, messageParts, bodyBuilder);
 
             if (bodyBuilder.Length == 0)
@@ -69,14 +71,16 @@ namespace SaintSender.Core.Services
                 foreach (MessagePart messagePart in messageParts)
                 {
 
-                    SaveAttachments(messagePart, messageId);
+                    if (messagePart.MimeType == "image/png" || messagePart.MimeType == "image/jpeg") {
+                        SaveAttachments(messagePart, messageId);
+                    }
 
-                    if (messagePart.MimeType == "text/plain")
+                    else if (messagePart.MimeType == "text/plain")
                     {
                         stringBuilder.Append(messagePart.Body.Data);
                     }
 
-                    if (messagePart.Parts != null)
+                    else if (messagePart.Parts != null)
                     {
                         GetBodyFromNestedParts(messageId, messagePart.Parts, stringBuilder);
                     }

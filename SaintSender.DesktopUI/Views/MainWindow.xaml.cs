@@ -54,7 +54,7 @@ namespace SaintSender.DesktopUI
 
             List<Email> emails = emailService.GetEmails();
 
-            ResultTxt.Text = emails[2].ToString();
+            ResultTxt.Text = emails[3].ToString();
 
 
         }

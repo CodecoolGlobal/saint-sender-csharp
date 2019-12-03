@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace SaintSender.Core.Entities
 {
@@ -18,11 +19,14 @@ namespace SaintSender.Core.Entities
             Body = body;
         }
 
+        private string Id { get; set; }
         private string From { get; set; }
         private string To { get; set; }
         private string Date { get; set; }
         private string Subject { get; set; }
         private string Body { get; set; }
+
+        private BitmapImage Image { get; set; }
 
         private List<FileInfo> Attachments { get; set; }
 
