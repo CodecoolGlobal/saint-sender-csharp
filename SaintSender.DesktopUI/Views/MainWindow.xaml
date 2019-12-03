@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:l="clr-namespace:SaintSender.DesktopUI.Converters"
         xmlns:local="clr-namespace:SaintSender.DesktopUI"
         mc:Ignorable="d"
         Title="SainSender" Height="450" Width="1050">
+    <Window.Resources>
+        <l:OpenedBoolToStringConverter x:Key="Opened"></l:OpenedBoolToStringConverter>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -20,7 +24,7 @@
                             <GridViewColumn Header="Subejct" Width="{Binding ElementName=helperField0, Path=ActualWidth}" DisplayMemberBinding="{Binding Subject}" />
                             <GridViewColumn Header="From" Width="{Binding ElementName=helperField1, Path=ActualWidth}" DisplayMemberBinding="{Binding From}" />
                             <GridViewColumn Header="Date" Width="{Binding ElementName=helperField2, Path=ActualWidth}" DisplayMemberBinding="{Binding Date}" />
-                            <GridViewColumn Header="Opened" Width="{Binding ElementName=helperField3, Path=ActualWidth}" DisplayMemberBinding="{Binding Opened}" />
+                            <GridViewColumn Header="Opened" Width="{Binding ElementName=helperField3, Path=ActualWidth}" DisplayMemberBinding="{Binding Opened, Converter={StaticResource Opened}}" />
                         </GridView.Columns>
                     </GridView>
                 </ListView.View>
