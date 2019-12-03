@@ -15,13 +15,15 @@ namespace SaintSender.Core.Entities
             Date = date;
             Subject = subject;
             Body = body;
+            Opened = false;
         }
 
-        private string From { get; set; }
-        private string To { get; set; }
-        private string Date { get; set; }
-        private string Subject { get; set; }
-        private string Body { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public string Date { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public bool Opened { get; set; }
 
         public override string ToString()
         {

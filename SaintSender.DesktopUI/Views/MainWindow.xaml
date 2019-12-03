@@ -5,37 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaintSender.DesktopUI"
         mc:Ignorable="d"
-        Title="SainSender" Height="450" Width="800">
+        Title="SainSender" Height="450" Width="1050">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="70" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Subject" TextAlignment="Center" FontSize="22"></TextBlock>
-                <TextBlock Grid.Column="1" Text="Sender" TextAlignment="Center" FontSize="22"></TextBlock>
-                <TextBlock Grid.Column="2" Text="Date" TextAlignment="Center" FontSize="22"></TextBlock>
-                <TextBlock Grid.Column="3" Text="Read" TextAlignment="Center" FontSize="22"></TextBlock>
-            </Grid>
-        </Border>
         <Grid Grid.Row="2" Margin="0,5,0,0">
-            <ListBox ItemsSource="{Binding Emails}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <ListBoxItem DataContext="{Binding Subject}">
-                            
-                        </ListBoxItem>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <ListView ItemsSource="{Binding Emails}">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Subejct" Width="{Binding ElementName=helperField0, Path=ActualWidth}" DisplayMemberBinding="{Binding Subject}" />
+                            <GridViewColumn Header="From" Width="{Binding ElementName=helperField1, Path=ActualWidth}" DisplayMemberBinding="{Binding From}" />
+                            <GridViewColumn Header="Date" Width="{Binding ElementName=helperField2, Path=ActualWidth}" DisplayMemberBinding="{Binding Date}" />
+                            <GridViewColumn Header="Opened" Width="{Binding ElementName=helperField3, Path=ActualWidth}" DisplayMemberBinding="{Binding Opened}" />
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
+            <Grid Grid.Column="0" x:Name="helperField0"/>
+            <Grid Grid.Column="1" x:Name="helperField1"/>
+            <Grid Grid.Column="2" x:Name="helperField2"/>
+            <Grid Grid.Column="3" x:Name="helperField3"/>
         </Grid>
     </Grid>
 </Window>
