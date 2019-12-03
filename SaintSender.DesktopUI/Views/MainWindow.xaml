@@ -17,7 +17,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="2" Margin="0,5,0,0">
-            <ListView ItemsSource="{Binding Emails}">
+            <ListView MouseDoubleClick="ListView_MouseDoubleClick" ItemsSource="{Binding Emails}">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
