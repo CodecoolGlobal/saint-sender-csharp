@@ -156,7 +156,17 @@ namespace SaintSender.Core.Services
                         attachData = attachData.Replace('_', '/');
 
                         byte[] data = Convert.FromBase64String(attachData);
-                        File.WriteAllBytes(Path.Combine(@"C:\Users\Dániel Kalocsay\Desktop\emailbackup", messagePart.Filename), data);
+
+                        string targetPath = $@"C:\Users\Dániel Kalocsay\Desktop\emailbackup\{messageId}";
+
+                        if (!Directory.Exists(targetPath))
+                        {
+                            Directory.CreateDirectory(targetPath);
+                            File.WriteAllBytes(Path.Combine(targetPath, messagePart.Filename), data);
+                        }
+
+                        File.WriteAllBytes(Path.Combine(targetPath, messagePart.Filename), data);
+
                     }
 
                     if (messagePart.MimeType == "text/plain")
