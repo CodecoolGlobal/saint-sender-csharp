@@ -23,6 +23,7 @@ using SaintSender.Core.Services;
 using SaintSender.Core.Entities;
 using Thread = System.Threading.Thread;
 using SaintSender.DesktopUI.ViewModels;
+using SaintSender.DesktopUI.Views;
 
 namespace SaintSender.DesktopUI
 {
@@ -58,8 +59,10 @@ namespace SaintSender.DesktopUI
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListView item = (ListView)sender;
-            var email = item.SelectedItem;
-            
+            Email email = (Email)item.SelectedItem;
+            EmailWindow emailWindow = new EmailWindow();
+            emailWindow.DataContext = email;
+            emailWindow.Show();
         }
     }
 }
