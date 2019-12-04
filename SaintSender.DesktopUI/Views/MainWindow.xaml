@@ -27,7 +27,7 @@
                             <GridViewColumn Header="Subejct" Width="{Binding ElementName=helperField0, Path=ActualWidth}" DisplayMemberBinding="{Binding Subject}" />
                             <GridViewColumn Header="From" Width="{Binding ElementName=helperField1, Path=ActualWidth}" DisplayMemberBinding="{Binding From}" />
                             <GridViewColumn Header="Date" Width="{Binding ElementName=helperField2, Path=ActualWidth}" DisplayMemberBinding="{Binding Date}" />
-                            <GridViewColumn Header="Opened" Width="{Binding ElementName=helperField3, Path=ActualWidth}" DisplayMemberBinding="{Binding Opened, Converter={StaticResource Opened}}" />
+                            <GridViewColumn Header="Opened" Width="{Binding ElementName=helperField3, Path=ActualWidth}" DisplayMemberBinding="{Binding Read, Converter={StaticResource Opened}}" />
                         </GridView.Columns>
                     </GridView>
                 </ListView.View>
