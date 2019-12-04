@@ -61,5 +61,11 @@ namespace SaintSender.DesktopUI
             Action showAction = () => emailWindow.Show();
             this.Dispatcher.BeginInvoke(showAction);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewEmailWindow newEmailWindow = new NewEmailWindow();
+            newEmailWindow.Show();
+        }
     }
 }
