@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Windows.Media.Imaging;
 using Google.Apis.Gmail.v1.Data;
@@ -10,7 +12,7 @@ namespace SaintSender.Core.Services
 {
     partial class EmailService
     {
-        private Email BuildEmail(Message message, string messageId)
+        private Email BuildEmail(Message message, string messageId, bool read)
         {
             IList<MessagePartHeader> messageHeaders = message.Payload.Headers;
 
@@ -34,7 +36,7 @@ namespace SaintSender.Core.Services
 
             string plainBody = DecodeMessageBody(bodyBuilder);
 
-            return new Email(from, to, date, subject, plainBody);
+            return new Email(from, to, date, subject, plainBody, read);
         }
 
         private void GetHeaders(ref string from, ref string to, ref string subject, ref string date, IList<MessagePartHeader> messageHeaders)
@@ -84,6 +86,15 @@ namespace SaintSender.Core.Services
                     {
                         GetBodyFromNestedParts(messageId, messagePart.Parts, stringBuilder);
                     }
+
+                    else if (messagePart.MimeType == "text/html")
+                    {
+                        //pass to webbrowser
+                    }
+
+                    //MailMessage message = new MailMessage();
+                    //Attachment attachm = new Attachment("asd", MediaTypeNames.Application.Octet);
+                    //message.Attachments.Add(attachm);
                 }
 
             }

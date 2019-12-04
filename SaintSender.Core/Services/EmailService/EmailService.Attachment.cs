@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Media.Imaging;
 using Google.Apis.Gmail.v1.Data;
 
 namespace SaintSender.Core.Services

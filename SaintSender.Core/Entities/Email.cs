@@ -10,13 +10,14 @@ namespace SaintSender.Core.Entities
 {
     public class Email
     {
-        public Email(string from, string to, string date, string subject, string body)
+        public Email(string from, string to, string date, string subject, string body, bool read)
         {
             From = from;
             To = to;
             Date = date;
             Subject = subject;
             Body = body;
+            Read = read;
         }
 
         private string Id { get; set; }
@@ -26,8 +27,7 @@ namespace SaintSender.Core.Entities
         private string Subject { get; set; }
         private string Body { get; set; }
 
-        private BitmapImage Image { get; set; }
-
+        private bool Read{ get; set; }
         private List<FileInfo> Attachments { get; set; }
 
         public override string ToString()

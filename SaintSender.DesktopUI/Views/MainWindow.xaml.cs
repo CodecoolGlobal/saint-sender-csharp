@@ -1,27 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GmailQuickstart;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1;
-using Google.Apis.Gmail.v1.Data;
-using Google.Apis.Requests;
-using Org.BouncyCastle.Utilities.Encoders;
 using SaintSender.Core.Services;
 using SaintSender.Core.Entities;
-using Thread = System.Threading.Thread;
 
 namespace SaintSender.DesktopUI
 {
@@ -55,7 +38,6 @@ namespace SaintSender.DesktopUI
             List<Email> emails = emailService.GetEmails();
 
             ResultTxt.Text = emails[3].ToString();
-
 
         }
 

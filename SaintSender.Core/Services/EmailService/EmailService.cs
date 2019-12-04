@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using GmailQuickstart;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
@@ -32,7 +33,18 @@ namespace SaintSender.Core.Services
             {
                 Message messageInfo = _gmail.Users.Messages.Get("me", message.Id).Execute();
 
-                Email email = BuildEmail(messageInfo, message.Id);
+                bool read = true;
+
+                IList<string> labels = messageInfo.LabelIds;
+
+                if (labels.Contains("UNREAD"))
+                {
+                    read = false;
+                }
+
+                Message msg = new Message();
+
+                Email email = BuildEmail(messageInfo, message.Id, read);
                 emails.Add(email);
             }
 
