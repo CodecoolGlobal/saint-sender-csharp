@@ -62,7 +62,9 @@ namespace SaintSender.DesktopUI
             Email email = (Email)item.Content;
             EmailWindow emailWindow = new EmailWindow();
             emailWindow.DataContext = email;
-            emailWindow.Show();
+            //emailWindow.Show();
+            Action showAction = () => emailWindow.Show();
+            this.Dispatcher.BeginInvoke(showAction);
         }
     }
 }
