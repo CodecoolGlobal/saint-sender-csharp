@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaintSender.DesktopUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,17 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class NewEmailWindow : Window
     {
-        public NewEmailWindow()
+        private NewEmailViewModel _vm;
+        public NewEmailWindow(NewEmailViewModel _vm)
         {
             InitializeComponent();
+            this._vm = _vm;
+            this.DataContext = _vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.SendEmail();
         }
     }
 }

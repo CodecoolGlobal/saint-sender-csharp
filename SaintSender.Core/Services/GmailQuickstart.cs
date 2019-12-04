@@ -17,7 +17,7 @@ namespace GmailQuickstart
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/gmail-dotnet-quickstart.json
-        static string[] Scopes = { GmailService.Scope.GmailReadonly };
+        static string[] Scopes = { GmailService.Scope.MailGoogleCom };
         static string ApplicationName = "Gmail API .NET Quickstart";
 
         private static string CredentialJSON = @"..\..\..\SaintSender.Core\Resources\credentials.json";

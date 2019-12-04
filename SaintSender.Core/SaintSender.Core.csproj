@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BindableBase.cs" />
     <Compile Include="Entities\Email.cs" />
     <Compile Include="Services\GmailQuickstart.cs" />
     <Compile Include="Services\EmailService.cs" />

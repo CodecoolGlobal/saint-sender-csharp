@@ -14,7 +14,7 @@ namespace SaintSender.Core.Services
 {
     public class EmailService
     {
-        private GmailService gmail;
+        private static GmailService gmail;
 
         public EmailService()
         {
@@ -157,6 +157,17 @@ namespace SaintSender.Core.Services
                 }
 
             }
+        }
+        public Message SendMail(Message message)
+        {
+            var result = gmail.Users.Messages.Send(message, "me").Execute();
+            return result;
+        }
+
+        public string GetOwnEmail()
+        {
+            var me = gmail.Users.GetProfile("me").Execute();
+            return me.EmailAddress;
         }
     }
 }

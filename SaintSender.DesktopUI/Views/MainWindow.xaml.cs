@@ -5,6 +5,7 @@ using System.Windows.Input;
 using GmailQuickstart;
 using Google.Apis.Auth.OAuth2;
 using SaintSender.Core.Entities;
+using SaintSender.Core.Services;
 using SaintSender.DesktopUI.ViewModels;
 using SaintSender.DesktopUI.Views;
 
@@ -42,7 +43,8 @@ namespace SaintSender.DesktopUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NewEmailWindow newEmailWindow = new NewEmailWindow();
+            NewEmailViewModel newEmailViewModel = new NewEmailViewModel(new EmailService());
+            NewEmailWindow newEmailWindow = new NewEmailWindow(newEmailViewModel);
             newEmailWindow.Show();
         }
     }
