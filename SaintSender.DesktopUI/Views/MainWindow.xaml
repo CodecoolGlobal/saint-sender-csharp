@@ -9,6 +9,9 @@
         Title="SainSender" Height="450" Width="1050">
     <Window.Resources>
         <l:OpenedBoolToStringConverter x:Key="Opened"></l:OpenedBoolToStringConverter>
+        <Style TargetType="ListViewItem">
+            <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -38,7 +41,7 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
+            <!--This is the hidden helper Field which is used to bind to-->
             <Grid Grid.Column="0" x:Name="helperField0"/>
             <Grid Grid.Column="1" x:Name="helperField1"/>
             <Grid Grid.Column="2" x:Name="helperField2"/>

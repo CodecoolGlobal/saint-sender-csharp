@@ -85,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\EmailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="Views\NewEmailWindow.xaml.cs">
       <DependentUpon>NewEmailWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +102,9 @@
     </Compile>
     <Compile Include="Converters\OpenedBoolToStringConverter.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\EmailWindow.xaml.cs">
+      <DependentUpon>EmailWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
