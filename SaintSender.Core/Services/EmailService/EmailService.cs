@@ -17,7 +17,18 @@ namespace SaintSender.Core.Services
             _gmail = Gmail.GetService();
         }
 
-        public List<Email> GetEmails()
+        public List<Email> GetEmails(bool allEmails, long timeStamp)
+        {
+
+            if (allEmails)
+            {
+                return GetAllEmails();
+            }
+
+            return GetLatestEmails(timeStamp);
+        }
+
+        private List<Email> GetAllEmails()
         {
             List<Email> emails = new List<Email>();
 
@@ -49,7 +60,7 @@ namespace SaintSender.Core.Services
             return emails;
         }
 
-        public List<Email> GetEmailsAfterATimestamp(Int64 unixTime)
+        private List<Email> GetLatestEmails(long unixTime)
         {
             List<Email> emails = new List<Email>();
 
