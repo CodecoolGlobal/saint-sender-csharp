@@ -44,6 +44,31 @@ namespace SaintSender.Core.Services
             return emails;
         }
 
+        public List<Email> GetEmailsAfterATimestamp(Int64 unixTime)
+        {
+            List<Email> emails = new List<Email>();
+
+            UsersResource.MessagesResource.ListRequest messageRequest = gmail.Users.Messages.List("me");
+
+            messageRequest.MaxResults = 10;
+            messageRequest.IncludeSpamTrash = true;
+            messageRequest.LabelIds = "INBOX";
+            messageRequest.Q = $"after:{unixTime}";
+
+            ListMessagesResponse messageResponse = messageRequest.Execute();
+            if (messageResponse.Messages != null)
+            {
+                foreach (Message message in messageResponse.Messages)
+                {
+                    Message messageInfo = gmail.Users.Messages.Get("me", message.Id).Execute();
+
+                    Email email = BuildEmail(messageInfo);
+                    emails.Add(email);
+                }
+            }
+            return emails;
+        }
+
         private Email BuildEmail(Message message)
         {
             IList<MessagePartHeader> messageHeaders = message.Payload.Headers;
