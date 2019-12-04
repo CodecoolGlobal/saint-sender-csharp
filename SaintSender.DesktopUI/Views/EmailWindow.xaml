@@ -24,6 +24,10 @@
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Subject:" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="From:" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Date:" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Subject}" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding From}" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Date}" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
         </Grid>
         <Border Margin="5,0,5,5" Grid.Row="2"  BorderBrush="Black" BorderThickness="1">
             <ScrollViewer Margin="5,5,5,5" FontSize="22" >

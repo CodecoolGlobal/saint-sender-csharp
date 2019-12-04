@@ -43,12 +43,8 @@ namespace SaintSender.DesktopUI
             this._vm = new MainWindowViewModel();
             this.DataContext = _vm;
             
-
-
             //UsersResource.LabelsResource.ListRequest request = Gmail.GetService().Users.Labels.List("me");
             //credential = Gmail.GetCredential();
-
-
         }
 
         private void SignOutBtn_Click(object sender, RoutedEventArgs e)
@@ -62,7 +58,6 @@ namespace SaintSender.DesktopUI
             Email email = (Email)item.Content;
             EmailWindow emailWindow = new EmailWindow();
             emailWindow.DataContext = email;
-            //emailWindow.Show();
             Action showAction = () => emailWindow.Show();
             this.Dispatcher.BeginInvoke(showAction);
         }
