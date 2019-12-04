@@ -5,6 +5,8 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1;
 using SaintSender.Core.Services;
 using SaintSender.Core.Entities;
+using Thread = System.Threading.Thread;
+using SaintSender.DesktopUI.ViewModels;
 
 namespace SaintSender.DesktopUI
 {
@@ -17,27 +19,18 @@ namespace SaintSender.DesktopUI
         private UserCredential credential;
         private GmailService gmail;
         private EmailService emailService;
+        private MainWindowViewModel _vm;
         public MainWindow()
         {
             InitializeComponent();
-
-            emailService = new EmailService();
+            this._vm = new MainWindowViewModel();
+            this.DataContext = _vm;
+            
 
 
             //UsersResource.LabelsResource.ListRequest request = Gmail.GetService().Users.Labels.List("me");
             //credential = Gmail.GetCredential();
 
-
-        }
-
-        private void GreetBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var service = new GreetService();
-            //var greeting = service.Greet(NigerianPrinceName);
-
-            List<Email> emails = emailService.GetEmails();
-
-            ResultTxt.Text = emails[3].ToString();
 
         }
 

@@ -21,12 +21,12 @@ namespace SaintSender.Core.Entities
         }
 
         private string Id { get; set; }
-        private string From { get; set; }
-        private string To { get; set; }
-        private string Date { get; set; }
-        private string Subject { get; set; }
-        private string Body { get; set; }
-        private bool Read{ get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public string Date { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public bool Read{ get; set; }
         private List<FileInfo> Attachments { get; set; }
 
         public override string ToString()

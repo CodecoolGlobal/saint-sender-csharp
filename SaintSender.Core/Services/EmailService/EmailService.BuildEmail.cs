@@ -4,6 +4,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 using System.Windows.Media.Imaging;
+using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
 using Org.BouncyCastle.Utilities.Encoders;
 using SaintSender.Core.Entities;

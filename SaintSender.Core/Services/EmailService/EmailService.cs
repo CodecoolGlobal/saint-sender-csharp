@@ -42,12 +42,44 @@ namespace SaintSender.Core.Services
                     read = false;
                 }
 
-                Message msg = new Message();
-
                 Email email = BuildEmail(messageInfo, message.Id, read);
                 emails.Add(email);
             }
 
+            return emails;
+        }
+
+        public List<Email> GetEmailsAfterATimestamp(Int64 unixTime)
+        {
+            List<Email> emails = new List<Email>();
+
+            UsersResource.MessagesResource.ListRequest messageRequest = _gmail.Users.Messages.List("me");
+
+            messageRequest.MaxResults = 10;
+            messageRequest.IncludeSpamTrash = true;
+            messageRequest.LabelIds = "INBOX";
+            messageRequest.Q = $"after:{unixTime}";
+
+            ListMessagesResponse messageResponse = messageRequest.Execute();
+            if (messageResponse.Messages != null)
+            {
+                foreach (Message message in messageResponse.Messages)
+                {
+                    Message messageInfo = _gmail.Users.Messages.Get("me", message.Id).Execute();
+
+                    bool read = true;
+
+                    IList<string> labels = messageInfo.LabelIds;
+
+                    if (labels.Contains("UNREAD"))
+                    {
+                        read = false;
+                    }
+
+                    Email email = BuildEmail(messageInfo, message.Id, read);
+                    emails.Add(email);
+                }
+            }
             return emails;
         }
 
