@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,26 +11,28 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using SaintSender.Core.Entities;
-using SaintSender.Core.Services;
 
 namespace SaintSender.DesktopUI.Views
 {
     /// <summary>
-    /// Interaction logic for EmailWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class EmailWindow : Window
+    public partial class LoginWindow : Window
     {
-        public EmailWindow()
+        public LoginWindow()
         {
             InitializeComponent();
         }
 
-        private void SaveEmailButton_Click(object sender, RoutedEventArgs e)
+        private void Login(object sender, RoutedEventArgs e)
         {
-            Email currentEmail = (Email)this.DataContext;
-            EmailService.BackupEmail(currentEmail);
-            Thread.Sleep(500);
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
+        private void Quit(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }
