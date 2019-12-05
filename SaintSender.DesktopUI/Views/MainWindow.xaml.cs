@@ -42,6 +42,7 @@ namespace SaintSender.DesktopUI
             Email email = (Email)item.Content;
 
             _vm.MarkAsRead(email.Id);
+            email.Read = true;
 
             EmailWindow emailWindow = new EmailWindow();
             emailWindow.DataContext = email;
