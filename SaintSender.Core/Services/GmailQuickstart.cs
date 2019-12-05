@@ -20,41 +20,19 @@ namespace GmailQuickstart
         static string[] Scopes = { GmailService.Scope.MailGoogleCom };
         static string ApplicationName = "Gmail API .NET Quickstart";
 
-        private static string CredentialJSON = @"..\..\..\SaintSender.Core\Resources\credentials.json";
+        private static string CredentialJSON = @"..\..\..\SaintSender.Core\Resources\credentials\credentials.json";
 
         public static GmailService GetService()
         {
             UserCredential credential = GetCredential();
 
-            // Create Gmail API service.
-            var service = new GmailService(new BaseClientService.Initializer()
+            GmailService service = new GmailService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
 
-
-            //// Define parameters of request.
-            //UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
-
-            //// List labels.
-            //IList<Label> labels = request.Execute().Labels;
-            //Console.WriteLine("Labels:");
-            //if (labels != null && labels.Count > 0)
-            //{
-            //    foreach (var labelItem in labels)
-            //    {
-            //        Console.WriteLine("{0}", labelItem.Name);
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("No labels found.");
-            //}
-            //Console.Read();
-
             return service;
-
         }
 
         public static UserCredential GetCredential()

@@ -1,13 +1,18 @@
-﻿using System;
+﻿
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GmailQuickstart;
 using Google.Apis.Auth.OAuth2;
-using SaintSender.Core.Entities;
+using Google.Apis.Gmail.v1;
 using SaintSender.Core.Services;
+using SaintSender.Core.Entities;
 using SaintSender.DesktopUI.ViewModels;
 using SaintSender.DesktopUI.Views;
+using System.Windows.Input;
+using System.Windows.Controls;
+using System;
 
 namespace SaintSender.DesktopUI
 {
