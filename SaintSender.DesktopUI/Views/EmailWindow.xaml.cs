@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SaintSender.Core.Entities;
+using SaintSender.Core.Services;
 
 namespace SaintSender.DesktopUI.Views
 {
@@ -22,6 +24,12 @@ namespace SaintSender.DesktopUI.Views
         public EmailWindow()
         {
             InitializeComponent();
+        }
+
+        private void SaveEmailButton_Click(object sender, RoutedEventArgs e)
+        {
+            Email currentEmail = (Email)this.DataContext;
+            EmailService.BackupEmail(currentEmail);
         }
     }
 }
