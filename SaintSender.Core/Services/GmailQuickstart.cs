@@ -56,9 +56,9 @@ namespace GmailQuickstart
             return credential;
         }
 
-        public static void RevokeToken(UserCredential credential)
+        public static async Task RevokeToken(UserCredential credential)
         {
-            credential.RevokeTokenAsync(CancellationToken.None);
+            await credential.RevokeTokenAsync(CancellationToken.None);
         }
     }
 }

@@ -10,9 +10,7 @@ using SaintSender.Core.Services;
 using SaintSender.Core.Entities;
 using SaintSender.DesktopUI.ViewModels;
 using SaintSender.DesktopUI.Views;
-using System.Windows.Input;
-using System.Windows.Controls;
-using System;
+using System.Threading.Tasks;
 
 namespace SaintSender.DesktopUI
 {
@@ -29,11 +27,13 @@ namespace SaintSender.DesktopUI
             InitializeComponent();
             this._vm = new MainWindowViewModel();
             this.DataContext = _vm;
+            credential = Gmail.GetCredential();
         }
 
         private void SignOutBtn_Click(object sender, RoutedEventArgs e)
         {
-            Gmail.RevokeToken(credential);
+            await Gmail.RevokeToken(credential);
+            this.Close();
         }
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
