@@ -3,6 +3,7 @@ using SaintSender.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -32,6 +33,21 @@ namespace SaintSender.DesktopUI.ViewModels
             //TODO change this to work on clicking backup button
 
             Timer();
+        }
+
+        public void Search(string searchText)
+        {
+            {
+                lock (LockEmails)
+                {
+                    Emails.Clear();
+                    List<Email> searchedEmails = _emailService.SearchEmails(searchText);
+                    foreach (var email in searchedEmails)
+                    {
+                        Emails.Add(email);
+                    }
+                }
+            }
         }
 
         private void Timer()

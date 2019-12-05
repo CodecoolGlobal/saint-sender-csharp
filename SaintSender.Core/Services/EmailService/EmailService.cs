@@ -74,5 +74,19 @@ namespace SaintSender.Core.Services
             _gmail.Users.Messages.Modify(modifyReq, "me", msgId).Execute();
         }
 
+        public List<Email> SearchEmails(string searchText)
+        {
+            List<Email> emails = new List<Email>();
+            UsersResource.MessagesResource.ListRequest messageRequest = _gmail.Users.Messages.List("me");
+
+            messageRequest.MaxResults = 30;
+            messageRequest.IncludeSpamTrash = true;
+            messageRequest.LabelIds = "INBOX";
+            messageRequest.Q = $"{searchText}";
+            
+
+            return GetEmailsResponse(messageRequest, emails);
+
+        }
     }
 }
