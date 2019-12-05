@@ -9,7 +9,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
@@ -29,10 +30,18 @@
             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding From}" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Date}" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22"></TextBlock>
         </Grid>
-        <Border Margin="5,0,5,5" Grid.Row="2"  BorderBrush="Black" BorderThickness="1">
+        <Border Margin="5,0,5,5" Grid.Row="1"  BorderBrush="Black" BorderThickness="1">
             <ScrollViewer Margin="5,5,5,5" FontSize="22" >
                 <TextBlock TextWrapping="Wrap" Text="{Binding Body}"></TextBlock>
             </ScrollViewer>
         </Border>
+        <Button Grid.Row="2"
+                Grid.Column="0"
+                Height="50"
+                Width="500"
+                Name="SaveEmail"
+                Click="SaveEmailButton_Click">
+            Save Email
+        </Button>
     </Grid>
 </Window>

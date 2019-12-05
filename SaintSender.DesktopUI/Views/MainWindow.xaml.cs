@@ -52,7 +52,7 @@ namespace SaintSender.DesktopUI
             this.Dispatcher.BeginInvoke(showAction);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NewEmailButton_Click(object sender, RoutedEventArgs e)
         {
             NewEmailViewModel newEmailViewModel = new NewEmailViewModel(new EmailService());
             NewEmailWindow newEmailWindow = new NewEmailWindow(newEmailViewModel);
