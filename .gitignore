@@ -10,7 +10,7 @@
 *.sln.docstates
 
 # saved emails
-SaintSender.Core/Resources/emailbackup/*
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
