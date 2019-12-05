@@ -85,7 +85,7 @@ namespace SaintSender.Core.Services
             {
                 try
                 {
-                    string path = $@"{attachmentsPath}\{attCount}";
+                    string path = $@"{attachmentsPath}\{attCount}.jpg";
                     File.WriteAllBytes(path, attachment);
                     attCount++;
                 }
