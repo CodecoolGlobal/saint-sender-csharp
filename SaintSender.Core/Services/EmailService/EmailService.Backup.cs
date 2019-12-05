@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using SaintSender.Core.Entities;
 
@@ -18,11 +20,12 @@ namespace SaintSender.Core.Services
             string pathRoot = $@"..\..\..\SaintSender.Core\Resources\emailbackup";
             string targetPath = $@"{pathRoot}\{email.Subject}-{validDate}";
 
+
+            CreateFoldersForEmail(targetPath);
+
             string fileName = $@"{targetPath}\{email.Id}.txt";
 
-            CreateFoldersForEmail(targetPath, fileName);
-
-            SaveEmailText(fileName, email.Body);
+            SaveEmailTextToFile(fileName, email.Body);
 
             string attachmentsPath = $@"{targetPath}\attachments";
 
@@ -36,7 +39,6 @@ namespace SaintSender.Core.Services
         private static string GenerateValidNames(Email email)
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-
             string validDate = email.Date;
 
             foreach (char c in invalid)
@@ -47,26 +49,22 @@ namespace SaintSender.Core.Services
             return validDate;
         }
 
-        private static void CreateFoldersForEmail(string targetPath, string fileName)
+        private static void CreateFoldersForEmail(string targetPath)
         {
             if (!Directory.Exists(targetPath))
             {
                 Directory.CreateDirectory(targetPath);
             }
-
-            if (!File.Exists(fileName))
-            {
-                File.Create(fileName);
-            }
         }
 
-        private static void SaveEmailText(string fileName, string emailBody)
+        private static void SaveEmailTextToFile(string fileName, string emailBody)
         {
-            FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
+            FileStream fileStream = File.Open(fileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
             StreamWriter writer = new StreamWriter(fileStream);
 
             writer.Write(emailBody);
             writer.Close();
+
             fileStream.Close();
         }
 
