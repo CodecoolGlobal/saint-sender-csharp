@@ -58,5 +58,20 @@ namespace SaintSender.DesktopUI
             NewEmailWindow newEmailWindow = new NewEmailWindow(newEmailViewModel);
             newEmailWindow.Show();
         }
+
+        private void Search_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var searchText = Search.Text;
+            _vm.Search(searchText);
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter )
+            {
+                var searchText = Search.Text;
+                _vm.Search(searchText);
+            }
+        }
     }
 }
