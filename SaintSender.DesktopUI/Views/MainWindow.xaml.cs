@@ -40,6 +40,9 @@ namespace SaintSender.DesktopUI
         {
             ListViewItem item = (ListViewItem)sender;
             Email email = (Email)item.Content;
+
+            _vm.MarkAsRead(email.Id);
+
             EmailWindow emailWindow = new EmailWindow();
             emailWindow.DataContext = email;
             Action showAction = () => emailWindow.Show();

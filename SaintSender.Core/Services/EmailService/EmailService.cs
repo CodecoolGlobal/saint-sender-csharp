@@ -67,10 +67,11 @@ namespace SaintSender.Core.Services
             return result;
         }
 
-        public string GetOwnEmail()
+        public void MarkAsRead(string msgId)
         {
-            var me = _gmail.Users.GetProfile("me").Execute();
-            return me.EmailAddress;
+            ModifyMessageRequest modifyReq = new ModifyMessageRequest();
+            modifyReq.RemoveLabelIds = new List<string> { "UNREAD" };
+            _gmail.Users.Messages.Modify(modifyReq, "me", msgId).Execute();
         }
 
     }

@@ -10,8 +10,9 @@ namespace SaintSender.Core.Entities
 {
     public class Email
     {
-        public Email(string from, string to, string date, string subject, string body, bool read)
+        public Email(string id, string from, string to, string date, string subject, string body, bool read)
         {
+            Id = id;
             From = from;
             To = to;
             Date = date;
@@ -20,7 +21,7 @@ namespace SaintSender.Core.Entities
             Read = read;
         }
 
-        private string Id { get; set; }
+        public string Id { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public string Date { get; set; }

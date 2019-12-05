@@ -37,7 +37,7 @@ namespace SaintSender.Core.Services
 
             string plainBody = DecodeMessageBody(bodyBuilder);
 
-            return new Email(from, to, date, subject, plainBody, read);
+            return new Email(messageId, from, to, date, subject, plainBody, read);
         }
 
         private void GetHeaders(ref string from, ref string to, ref string subject, ref string date, IList<MessagePartHeader> messageHeaders)
