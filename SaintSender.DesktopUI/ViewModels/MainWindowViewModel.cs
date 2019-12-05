@@ -29,6 +29,7 @@ namespace SaintSender.DesktopUI.ViewModels
             BindingOperations.EnableCollectionSynchronization(Emails,LockEmails);
             
             TestEmailBackup(Emails[27]);
+            //TODO change this to work on clicking backup button
 
             Timer();
         }
