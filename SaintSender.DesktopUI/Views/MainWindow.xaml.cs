@@ -30,9 +30,11 @@ namespace SaintSender.DesktopUI
             credential = Gmail.GetCredential();
         }
 
-        private void SignOutBtn_Click(object sender, RoutedEventArgs e)
+        private async void SignOutBtn_Click(object sender, RoutedEventArgs e)
         {
             await Gmail.RevokeToken(credential);
+            LoginWindow logIn = new LoginWindow();
+            logIn.Show();
             this.Close();
         }
 
