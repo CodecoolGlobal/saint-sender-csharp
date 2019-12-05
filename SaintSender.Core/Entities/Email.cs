@@ -10,7 +10,7 @@ namespace SaintSender.Core.Entities
 {
     public class Email : BindableBase
     {
-        public Email(string id, string from, string to, string date, string subject, string body, bool read)
+        public Email(string id, string from, string to, string date, string subject, string body, bool read, List<byte[]> attachments)
         {
             Id = id;
             From = from;
@@ -19,6 +19,7 @@ namespace SaintSender.Core.Entities
             Subject = subject;
             Body = body;
             Read = read;
+            Attachments = attachments;
         }
 
         public string Id { get; set; }
@@ -37,7 +38,7 @@ namespace SaintSender.Core.Entities
                 SetProperty(ref _read, value);
             }
         }
-        private List<FileInfo> Attachments { get; set; }
+        public List<byte[]> Attachments { get; set; }
 
         public override string ToString()
         {

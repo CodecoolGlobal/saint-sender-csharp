@@ -6,7 +6,7 @@ namespace SaintSender.Core.Services
 {
     public partial class EmailService
     {
-        private void SaveAttachments(MessagePart messagePart, string messageId)
+        private byte[] GetAttachment(MessagePart messagePart, string messageId)
         {
             string attId = messagePart.Body.AttachmentId;
             MessagePartBody attachPart = _gmail.Users.Messages.Attachments.Get("me", messageId, attId).Execute();
@@ -18,15 +18,7 @@ namespace SaintSender.Core.Services
 
             byte[] data = Convert.FromBase64String(attachData);
 
-            string targetPath = $@"..\..\..\SaintSender.Core\Resources\emailbackup\{messageId}";
-
-            if (!Directory.Exists(targetPath))
-            {
-                Directory.CreateDirectory(targetPath);
-                File.WriteAllBytes(Path.Combine(targetPath, messagePart.Filename), data);
-            }
-
-            File.WriteAllBytes(Path.Combine(targetPath, messagePart.Filename), data);
+            return data;
         }
 
     }

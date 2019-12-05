@@ -27,6 +27,10 @@ namespace SaintSender.DesktopUI.ViewModels
             Emails = new ObservableCollection<Email>(_emailService.GetEmails(false, TimeStamp));
 
             BindingOperations.EnableCollectionSynchronization(Emails,LockEmails);
+            
+            TestEmailBackup(Emails[27]);
+            //TODO change this to work on clicking backup button
+
             Timer();
         }
 
@@ -58,6 +62,11 @@ namespace SaintSender.DesktopUI.ViewModels
         public void MarkAsRead(string msgId)
         {
             _emailService.MarkAsRead(msgId);
+        }
+
+        private void TestEmailBackup(Email email)
+        {
+            EmailService.BackupEmail(email);
         }
     }
 }
