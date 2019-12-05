@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace SaintSender.Core.Entities
 {
-    public class Email
+    public class Email : BindableBase
     {
         public Email(string id, string from, string to, string date, string subject, string body, bool read, List<byte[]> attachments)
         {
@@ -28,7 +28,16 @@ namespace SaintSender.Core.Entities
         public string Date { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
-        public bool Read{ get; set; }
+
+        private bool _read;
+        public bool Read
+        {
+            get { return _read; }
+            set
+            {
+                SetProperty(ref _read, value);
+            }
+        }
         public List<byte[]> Attachments { get; set; }
 
         public override string ToString()

@@ -58,6 +58,11 @@ namespace SaintSender.DesktopUI.ViewModels
             TimeStamp = DateTimeOffset.Now.ToUnixTimeSeconds();
         }
 
+        public void MarkAsRead(string msgId)
+        {
+            _emailService.MarkAsRead(msgId);
+        }
+
         private void TestEmailBackup(Email email)
         {
             EmailService.BackupEmail(email);

@@ -103,9 +103,6 @@ namespace SaintSender.Core.Services
                         //pass to webbrowser
                     }
 
-                    //MailMessage message = new MailMessage();
-                    //Attachment attachm = new Attachment("asd", MediaTypeNames.Application.Octet);
-                    //message.Attachments.Add(attachm);
                 }
 
             }

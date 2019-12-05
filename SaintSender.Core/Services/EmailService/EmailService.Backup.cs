@@ -18,9 +18,10 @@ namespace SaintSender.Core.Services
             string pathRoot = $@"..\..\..\SaintSender.Core\Resources\emailbackup";
             string targetPath = $@"{pathRoot}\{email.Subject}-{validDate}";
 
-            CreateFoldersForEmail(email, targetPath);
-
             string fileName = $@"{targetPath}\{email.Id}.txt";
+
+            CreateFoldersForEmail(targetPath, fileName);
+
             SaveEmailText(fileName, email.Body);
 
             string attachmentsPath = $@"{targetPath}\attachments";
@@ -46,14 +47,12 @@ namespace SaintSender.Core.Services
             return validDate;
         }
 
-        private static void CreateFoldersForEmail(Email email, string targetPath)
+        private static void CreateFoldersForEmail(string targetPath, string fileName)
         {
             if (!Directory.Exists(targetPath))
             {
                 Directory.CreateDirectory(targetPath);
             }
-
-            string fileName = $@"{targetPath}\{email.Id}.txt";
 
             if (!File.Exists(fileName))
             {
@@ -68,6 +67,7 @@ namespace SaintSender.Core.Services
 
             writer.Write(emailBody);
             writer.Close();
+            fileStream.Close();
         }
 
         private static void CreateFolderForAttachments(string attachmentsPath)
