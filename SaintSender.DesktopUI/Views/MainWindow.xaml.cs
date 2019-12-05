@@ -62,5 +62,14 @@ namespace SaintSender.DesktopUI
             var searchText = Search.Text;
             _vm.Search(searchText);
         }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter )
+            {
+                var searchText = Search.Text;
+                _vm.Search(searchText);
+            }
+        }
     }
 }
