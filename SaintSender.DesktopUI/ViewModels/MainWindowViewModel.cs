@@ -24,7 +24,7 @@ namespace SaintSender.DesktopUI.ViewModels
             TimeStamp = DateTimeOffset.Now.ToUnixTimeSeconds();
             LockEmails = new object();
 
-            Emails = new ObservableCollection<Email>(_emailService.GetEmails(true, TimeStamp));
+            Emails = new ObservableCollection<Email>(_emailService.GetEmails(false, TimeStamp));
 
             BindingOperations.EnableCollectionSynchronization(Emails,LockEmails);
             Timer();
@@ -36,12 +36,13 @@ namespace SaintSender.DesktopUI.ViewModels
             timer.Elapsed += Sync;
             timer.AutoReset = true;
             timer.Enabled = true;
+            timer.Start();
             
         }
 
         private void Sync(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var emails = _emailService.GetEmails(false, TimeStamp);
+            var emails = _emailService.GetEmails(true, TimeStamp);
             lock (LockEmails)
             {
 

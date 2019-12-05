@@ -17,61 +17,27 @@ namespace SaintSender.Core.Services
             _gmail = Gmail.GetService();
         }
 
-        public List<Email> GetEmails(bool allEmails, long timeStamp)
-        {
-
-            if (allEmails)
-            {
-                return GetAllEmails();
-            }
-
-            return GetLatestEmails(timeStamp);
-        }
-
-        private List<Email> GetAllEmails()
+        public List<Email> GetEmails(bool recentOnly, long timeStamp)
         {
             List<Email> emails = new List<Email>();
-
             UsersResource.MessagesResource.ListRequest messageRequest = _gmail.Users.Messages.List("me");
 
-            messageRequest.MaxResults = 20;
+            messageRequest.MaxResults = 30;
             messageRequest.IncludeSpamTrash = true;
             messageRequest.LabelIds = "INBOX";
 
-            ListMessagesResponse messageResponse = messageRequest.Execute();
-
-            foreach (Message message in messageResponse.Messages)
+            if (recentOnly)
             {
-                Message messageInfo = _gmail.Users.Messages.Get("me", message.Id).Execute();
-
-                bool read = true;
-
-                IList<string> labels = messageInfo.LabelIds;
-
-                if (labels.Contains("UNREAD"))
-                {
-                    read = false;
-                }
-
-                Email email = BuildEmail(messageInfo, message.Id, read);
-                emails.Add(email);
+                messageRequest.Q = $"after:{timeStamp}";
             }
 
-            return emails;
+            return GetEmailsResponse(messageRequest, emails);
         }
 
-        private List<Email> GetLatestEmails(long unixTime)
+        private List<Email> GetEmailsResponse(UsersResource.MessagesResource.ListRequest request, List<Email> emails)
         {
-            List<Email> emails = new List<Email>();
+            ListMessagesResponse messageResponse = request.Execute();
 
-            UsersResource.MessagesResource.ListRequest messageRequest = _gmail.Users.Messages.List("me");
-
-            messageRequest.MaxResults = 10;
-            messageRequest.IncludeSpamTrash = true;
-            messageRequest.LabelIds = "INBOX";
-            messageRequest.Q = $"after:{unixTime}";
-
-            ListMessagesResponse messageResponse = messageRequest.Execute();
             if (messageResponse.Messages != null)
             {
                 foreach (Message message in messageResponse.Messages)
@@ -91,6 +57,7 @@ namespace SaintSender.Core.Services
                     emails.Add(email);
                 }
             }
+
             return emails;
         }
 
