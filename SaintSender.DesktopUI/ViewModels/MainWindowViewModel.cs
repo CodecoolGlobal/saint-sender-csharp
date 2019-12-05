@@ -27,6 +27,9 @@ namespace SaintSender.DesktopUI.ViewModels
             Emails = new ObservableCollection<Email>(_emailService.GetEmails(false, TimeStamp));
 
             BindingOperations.EnableCollectionSynchronization(Emails,LockEmails);
+            
+            TestEmailBackup(Emails[27]);
+
             Timer();
         }
 
@@ -53,6 +56,11 @@ namespace SaintSender.DesktopUI.ViewModels
                 }
             }
             TimeStamp = DateTimeOffset.Now.ToUnixTimeSeconds();
+        }
+
+        private void TestEmailBackup(Email email)
+        {
+            EmailService.BackupEmail(email);
         }
     }
 }

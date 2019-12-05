@@ -10,24 +10,26 @@ namespace SaintSender.Core.Entities
 {
     public class Email
     {
-        public Email(string from, string to, string date, string subject, string body, bool read)
+        public Email(string id, string from, string to, string date, string subject, string body, bool read, List<byte[]> attachments)
         {
+            Id = id;
             From = from;
             To = to;
             Date = date;
             Subject = subject;
             Body = body;
             Read = read;
+            Attachments = attachments;
         }
 
-        private string Id { get; set; }
+        public string Id { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public string Date { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
         public bool Read{ get; set; }
-        private List<FileInfo> Attachments { get; set; }
+        public List<byte[]> Attachments { get; set; }
 
         public override string ToString()
         {

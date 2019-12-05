@@ -21,6 +21,7 @@ namespace SaintSender.Core.Services
             string to = "";
             string subject = "";
             string date = "";
+            List<byte[]> attachments = new List<byte[]>();
 
             GetHeaders(ref from, ref to, ref subject, ref date, messageHeaders);
 
@@ -28,7 +29,7 @@ namespace SaintSender.Core.Services
 
             StringBuilder bodyBuilder = new StringBuilder(); // lul
             BitmapImage image = new BitmapImage();
-            GetBodyFromNestedParts(messageId, messageParts, bodyBuilder);
+            GetBodyFromNestedParts(messageId, messageParts, bodyBuilder, ref attachments);
 
             if (bodyBuilder.Length == 0)
             {
@@ -37,7 +38,7 @@ namespace SaintSender.Core.Services
 
             string plainBody = DecodeMessageBody(bodyBuilder);
 
-            return new Email(from, to, date, subject, plainBody, read);
+            return new Email(messageId, from, to, date, subject, plainBody, read, attachments);
         }
 
         private void GetHeaders(ref string from, ref string to, ref string subject, ref string date, IList<MessagePartHeader> messageHeaders)
@@ -67,25 +68,34 @@ namespace SaintSender.Core.Services
             }
         }
 
-        private void GetBodyFromNestedParts(string messageId, IList<MessagePart> messageParts, StringBuilder stringBuilder)
+        private void GetBodyFromNestedParts(string messageId, IList<MessagePart> messageParts, StringBuilder stringBuilder, ref List<byte[]> attachments)
         {
             if (messageParts != null)
             {
                 foreach (MessagePart messagePart in messageParts)
                 {
 
-                    if (messagePart.MimeType == "image/png" || messagePart.MimeType == "image/jpeg") {
-                        SaveAttachments(messagePart, messageId);
+                    //if (messagePart.MimeType == "image/png" || messagePart.MimeType == "image/jpeg") {
+                    //    GetAttachment(messagePart, messageId);
+                    //}
+
+                    try
+                    {
+                        attachments.Add(GetAttachment(messagePart, messageId));
+                    }
+                    catch (Exception)
+                    {
+
                     }
 
-                    else if (messagePart.MimeType == "text/plain")
+                    if (messagePart.MimeType == "text/plain")
                     {
                         stringBuilder.Append(messagePart.Body.Data);
                     }
 
                     else if (messagePart.Parts != null)
                     {
-                        GetBodyFromNestedParts(messageId, messagePart.Parts, stringBuilder);
+                        GetBodyFromNestedParts(messageId, messagePart.Parts, stringBuilder, ref attachments);
                     }
 
                     else if (messagePart.MimeType == "text/html")
