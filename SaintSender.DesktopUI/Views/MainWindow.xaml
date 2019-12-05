@@ -59,7 +59,7 @@
             <Button Grid.Row="2" Grid.Column="1" Margin="0,0,5,0" Click="Search_Button_Click">Search</Button>
 
             <Button Grid.Row="2"
-                    Grid.Column="2"
+                    Grid.Column="3"
                     Margin="0,0,5,0"
                     Click="NewEmailButton_Click"
                     Content="New Email">
